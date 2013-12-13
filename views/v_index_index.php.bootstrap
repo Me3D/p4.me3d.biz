@@ -1,0 +1,283 @@
+<div class="row clearfix" >
+	<!--<div id="test">dddddddddddddhi</div> -->
+	<div class="col-md-1 column">
+		<div class="btn-group btn-group-vertical btn-group-md">
+			 <button class="btn btn-default" type="button"><em class="glyphicon glyphicon-align-left"></em> Left</button> <button class="btn btn-default" type="button"><em class="glyphicon glyphicon-align-center"></em> Center</button> <button class="btn btn-default" type="button"><em class="glyphicon glyphicon-align-right"></em> Right</button> <button class="btn btn-default" type="button"><em class="glyphicon glyphicon-align-justify"></em> Justify</button>
+		</div>
+	</div>
+	
+	
+	<div class="col-md-11 column" style="height: 400px;">
+<!--		<table cellpadding="0" cellspacing="0" border="0" class="" id="example">
+			<thead>
+				<tr>
+					<th>Target ID</th>
+					<th>IP</th>
+					<th>OS</th>
+					<th>Scanned</th>
+					<th>Notes</th>
+				</tr>
+			</thead>
+			<tbody>
+	
+				
+			</tbody>
+
+		</table>-->
+		
+		
+		<table class="fancyTable" id="myTable01" cellpadding="0" cellspacing="0">
+    			    <thead>
+    			        <tr>
+    			            <th>Browser</th>
+    			            <th>Visits</th>
+    			            <th>Pages/Visit</th>
+    			            <th>Avg. Time on Site</th>
+    			            <th>% New Visits</th>
+    			            <th>Bounce Rate</th>
+    			        </tr>
+    			    </thead>
+    			    <tbody>
+    			        <tr>
+    			            <td>Firefox</td>
+    			            <td>1,990</td>
+    			            <td>3.11</td>
+    			            <td>00:04:22</td>
+    			            <td>70.00%</td>
+    			            <td>32.61%</td>
+    			        </tr>
+    			        <tr>
+    			            <td>Firefox</td>
+    			            <td>1,990</td>
+    			            <td>3.11</td>
+    			            <td>00:04:22</td>
+    			            <td>70.00%</td>
+    			            <td>32.61%</td>
+    			        </tr>
+    			        <tr>
+    			            <td>Firefox</td>
+    			            <td>1,990</td>
+    			            <td>3.11</td>
+    			            <td>00:04:22</td>
+    			            <td>70.00%</td>
+    			            <td>32.61%</td>
+    			        </tr>
+    			        <tr>
+    			            <td>Firefox</td>
+    			            <td>1,990</td>
+    			            <td>3.11</td>
+    			            <td>00:04:22</td>
+    			            <td>70.00%</td>
+    			            <td>32.61%</td>
+    			        </tr>
+    			        <tr>
+    			            <td>Firefox</td>
+    			            <td>1,990</td>
+    			            <td>3.11</td>
+    			            <td>00:04:22</td>
+    			            <td>70.00%</td>
+    			            <td>32.61%</td>
+    			        </tr>
+    			        <tr>
+    			            <td>Firefox</td>
+    			            <td>1,990</td>
+    			            <td>3.11</td>
+    			            <td>00:04:22</td>
+    			            <td>70.00%</td>
+    			            <td>32.61%</td>
+    			        </tr>
+    			        <tr>
+    			            <td>Firefox</td>
+    			            <td>1,990</td>
+    			            <td>3.11</td>
+    			            <td>00:04:22</td>
+    			            <td>70.00%</td>
+    			            <td>32.61%</td>
+    			        </tr>
+    			        <tr>
+    			            <td>Firefox</td>
+    			            <td>1,990</td>
+    			            <td>3.11</td>
+    			            <td>00:04:22</td>
+    			            <td>70.00%</td>
+    			            <td>32.61%</td>
+    			        </tr>
+    			        <tr>
+    			            <td>Firefox</td>
+    			            <td>1,990</td>
+    			            <td>3.11</td>
+    			            <td>00:04:22</td>
+    			            <td>70.00%</td>
+    			            <td>32.61%</td>
+    			        </tr>
+    			        <tr>
+    			            <td>Firefox</td>
+    			            <td>1,990</td>
+    			            <td>3.11</td>
+    			            <td>00:04:22</td>
+    			            <td>70.00%</td>
+    			            <td>32.61%</td>
+    			        </tr>
+    			        <tr>
+    			            <td>Firefox</td>
+    			            <td>1,990</td>
+    			            <td>3.11</td>
+    			            <td>00:04:22</td>
+    			            <td>70.00%</td>
+    			            <td>32.61%</td>
+    			        </tr>
+    			        <tr>
+    			            <td>Firefox</td>
+    			            <td>1,990</td>
+    			            <td>3.11</td>
+    			            <td>00:04:22</td>
+    			            <td>70.00%</td>
+    			            <td>32.61%</td>
+    			        </tr>
+    			        <tr>
+    			            <td>Firefox</td>
+    			            <td>1,990</td>
+    			            <td>3.11</td>
+    			            <td>00:04:22</td>
+    			            <td>70.00%</td>
+    			            <td>32.61%</td>
+    			        </tr>
+    			        <tr>
+    			            <td>Firefox</td>
+    			            <td>1,990</td>
+    			            <td>3.11</td>
+    			            <td>00:04:22</td>
+    			            <td>70.00%</td>
+    			            <td>32.61%</td>
+    			        </tr>
+    			        <tr>
+    			            <td>Firefox</td>
+    			            <td>1,990</td>
+    			            <td>3.11</td>
+    			            <td>00:04:22</td>
+    			            <td>70.00%</td>
+    			            <td>32.61%</td>
+    			        </tr>
+    			        <tr>
+    			            <td>Firefox</td>
+    			            <td>1,990</td>
+    			            <td>3.11</td>
+    			            <td>00:04:22</td>
+    			            <td>70.00%</td>
+    			            <td>32.61%</td>
+    			        </tr>
+    			    </tbody>
+    			</table>	
+		
+	</div>
+
+</div>
+<div id="spacer" style="background: green; height:5px; margin-bottom: 5px; margin-top: 5px">
+
+	<div class="row clearfix">
+		<div class="col-md-10 column" style="overflow-y: scroll; height:600px; display: block; ">
+			<h2>
+				Heading
+			</h2>
+			<p>
+				Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+			</p>
+			<p>
+				Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+			</p>
+			<p>
+				Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+			</p>
+			<p>
+				Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+			</p>
+			<p>
+				Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+			</p>
+			<p>
+				Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+			</p>
+			<p>
+				Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+			</p>
+			<p>
+				Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+			</p>
+			<p>
+				Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+			</p>
+			<p>
+				Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+			</p>
+
+		</div>
+		<div class="col-md-2 column" style="overflow-y: scroll; height:600px; display: block;"> 
+				<li>
+					Lorem ipsum dolor sit amet
+				</li>
+				<li>
+					Consectetur adipiscing elit
+				</li>
+				<li>
+					Integer molestie lorem at massa
+				</li>
+				<li>
+					Facilisis in pretium nisl aliquet
+				</li>
+				<li>
+					Nulla volutpat aliquam velit
+				</li>
+				<li>
+					Faucibus porta lacus fringilla vel
+				</li>
+				<li>
+					Aenean sit amet erat nunc
+				</li>
+				<li>
+					Eget porttitor lorem
+				</li>
+				<li>
+					Lorem ipsum dolor sit amet
+				</li>
+				<li>
+					Consectetur adipiscing elit
+				</li>
+				<li>
+					Integer molestie lorem at massa
+				</li>
+				<li>
+					Facilisis in pretium nisl aliquet
+				</li>
+				<li>
+					Nulla volutpat aliquam velit
+				</li>
+				<li>
+					Faucibus porta lacus fringilla vel
+				</li>
+				<li>
+					Aenean sit amet erat nunc
+				</li>
+				<li>
+					Eget porttitor lorem
+				</li>
+			</ul>
+		</div>
+	</div>
+	
+	<div id="spacer" style="background: green; height:5px; margin-bottom: 5px; margin-top: 5px">
+	  
+	</div>
+	
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<form role="form" class="form-horizontal">
+				<div class="col-sm-10" >
+					 <input type="text" class="form-control" id="message"></input>
+  
+				</div>
+				<div class="col-sm-2">	
+				  <button type="submit" class="btn btn-default">Send</button>		
+				</div>
+			</form>
+		</div>
+	</div>
