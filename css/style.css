@@ -44,6 +44,44 @@ html {
 
 /* end basic styling                                 */
 
+
+/* chat */
+
+
+div#chat {
+	border: 1px solid #963;
+	width: 1016px;
+	height:400px;
+	overflow: auto;
+}
+#chat > p{
+	color: #fff;
+}
+/* send */
+div#send {
+	/*border: 1px solid #963;*/
+	width: 1016px;
+	height:70px;
+	
+}
+#send {
+	color: #fff;
+}
+
+#message {
+	width: 950px;
+}
+
+.chat_username {
+	color: #f00000;
+	display: inline;
+}
+
+.chat_message {
+	color: #f0ffff;
+	display: inline;
+}
+
 /*Target Table styles */
 .t_head {
 	color: #fff;
@@ -62,7 +100,7 @@ html {
 div.tableContainer {
 	clear: both;
 	border: 1px solid #963;
-	height: 285px;
+	height: 295px;
 	overflow: auto;
 	width: 1016px
 }

@@ -43,59 +43,47 @@ class target_controller extends base_controller {
 			if ($c >=1 ) {
 				echo json_encode($target);
 			}
-
-
-			//print_r($target);
-			//print_r("Count: ".$c);
-		}
-
-	}
+		}//end if
+	} //end of target()
 	
 	//Updates a target in the database from the modal dialog.
 	public function update_target () {
 		
-	# Dump out the results of POST to see what the form submitted
-        //echo '<pre>';
-        //print_r($_POST);
-        
-	if(isset($_POST['update'])) {
-		$tid = $_POST["tid"];
-		$ip = $_POST["ip_address"];
-		$os = $_POST["os"];
-		$scanned = $_POST["scanned"];
-		$notes = htmlspecialchars($_POST["notes"], ENT_QUOTES, 'UTF-8');
-		$description = htmlspecialchars($_POST["description"], ENT_QUOTES, 'UTF-8');
-		//$notes = $_POST["notes"];
+		# Dump out the results of POST to see what the form submitted
+		//echo '<pre>';
+		//print_r($_POST);
 		
-		$q = "UPDATE targets SET
-		target_ip = '".$ip."',  
-		notes = '".$notes."',
-		description = '".$description."',
-		os = '".$os."',
-		scanned = '".$scanned."'
-		WHERE target_id = '".$tid."'
-		";
-		//print_r($q);
-		DB::instance(DB_NAME)->query($q);
-		//echo '</pre>';
-		Router::redirect('/');
-	}elseif(isset($_POST['delete'])){
-		$tid = $_POST["tid"];
-		$q = "DELETE from targets WHERE target_id = '".$tid."' ";
-		DB::instance(DB_NAME)->query($q);
-		Router::redirect('/');
-		
-	}
-	
-	
-
+		if(isset($_POST['update'])) {
+			$tid = $_POST["tid"];
+			$ip = $_POST["ip_address"];
+			$os = $_POST["os"];
+			$scanned = $_POST["scanned"];
+			$notes = htmlspecialchars($_POST["notes"], ENT_QUOTES, 'UTF-8');
+			$description = htmlspecialchars($_POST["description"], ENT_QUOTES, 'UTF-8');
+			
+			$q = "UPDATE targets SET
+			target_ip = '".$ip."',  
+			notes = '".$notes."',
+			description = '".$description."',
+			os = '".$os."',
+			scanned = '".$scanned."'
+			WHERE target_id = '".$tid."'
+			";
+			
+			DB::instance(DB_NAME)->query($q);
+			//echo '</pre>';
+			Router::redirect('/');
+		}elseif(isset($_POST['delete'])){
+			$tid = $_POST["tid"];
+			$q = "DELETE from targets WHERE target_id = '".$tid."' ";
+			DB::instance(DB_NAME)->query($q);
+			Router::redirect('/');		
+		}//end elseif
 	}//end update target
 	
 	
 	/* Add a target*/
 	public function add_target(){
-		
-		
 		$ip = $_POST["ip_address"];
 		$os = $_POST["os"];
 		$scanned = $_POST["scanned"];
@@ -110,8 +98,6 @@ class target_controller extends base_controller {
 		description = '$description'		
 		";
 		DB::instance(DB_NAME)->query($q);
-		
-		
 		Router::redirect('/');
 	}
 	

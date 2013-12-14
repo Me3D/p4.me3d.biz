@@ -34,16 +34,42 @@
     <div class="col-md-1"></div>
  </div> <!-- end row-->
   <!-- top half of screen for targets -->
- 
- 
- 
- 
- 
+  
 <!-- test zone -->
 
 <div>
 
 </div>
+
+
+<!-- chat section -->
+
+<div class = "row" >
+    <div class="col-md-1"></div> <!-- spacer to align with targets table -->
+        <div class="col-md-10">
+            <div id="chat" >
+                
+            </div> <!-- chat -->
+        </div><!-- Chat section -->
+    <div class="col-md-1"></div>
+    
+</div> <!-- End chat row div-->
+
+<!-- send section -->
+<div class = "row" >
+    <div class="col-md-1"></div> <!-- spacer to align with targets table method='POST' action='/chat/send' -->
+        <div class="col-md-10">
+            <form id="send" class="form-inline" role="form" >
+                <div class="form-group"> 
+                    <textarea type="text" id="message" name="message" class="form-control" row="3" placeholder="Message input"></textarea>
+                </div>
+                <div class="form-group">
+                    <button id="send-message-button" class="btn btn-default" >Send</button>
+                </div>
+            </form> <!-- send form -->
+        </div><!-- send section -->
+    <div class="col-md-1"></div>
+</div> <!-- End send row div-->
 
 
 
@@ -89,9 +115,9 @@
 	  </div>
 	    
             <div class="row">
-                <div class="col-md-1"> <button type="submit" name="update" class="btn btn-primary">Submit</button></div>
+                <div class="col-md-1"><button type="submit" name="update" class="btn btn-primary">Submit</button></div>
                 <div class="col-md-5"></div>
-                <div class="col-md-1"><button id="del_but" type="submit" name="delete" class="btn btn-danger">Delete</button></div>
+                <div class="col-md-1"><button type="submit" name="delete" id="del_but" class="btn btn-danger">Delete</button></div>
             </div>
         </form>
 	

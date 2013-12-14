@@ -3,8 +3,8 @@ $(document).ready(function() {
 	var interval = 2000;
 	var t;
 	
-/*update the target table*/
-	var refresh = function() {
+	/*update the target table*/
+	var refresh_targets = function() {
 		$.when($.ajax({
 			url: '/target/update',
 			dataType: 'json',
@@ -12,7 +12,7 @@ $(document).ready(function() {
 			success: function( targets ){
 				t = targets;
 				setTimeout(function() {
-					refresh();
+					refresh_targets();
 				}, interval);
 			}//end success
 		})).then(
@@ -23,13 +23,47 @@ $(document).ready(function() {
 				};
 				$('#example > tbody').html(new_table);
 			});
-
 		;//end ajax
-	
 	};//end refresh
-	refresh();
+	refresh_targets(); //restart it all
 
-/*modal dialog*/
+	/*update the chat text area*/
+	var refresh_chat = function() {
+		var oldscrollHeight = $("#chat")[0].scrollHeight; /* this line inspired from http://stackoverflow.com/questions/12657206/how-to-scroll-down-to-new-messages-on-ajax-chat */
+		//go get the last 50 chat messages
+		$.when($.ajax({
+			url: '/chat/get',
+			dataType: 'json',
+			async: true,
+			success: function( chats ){
+				c = chats;
+				setTimeout(function() {
+					refresh_chat();
+				}, interval);
+			}//end success
+		})).then(
+			function (){ //stuff chats into the chat div
+				var new_chat = "";
+				for (i = 0; i < c.length; i++) {
+					new_chat += '<div class="chat_username">' + c[i].username + ': </div><div class="chat_message">' + c[i].message + '</div>' + '<p></p>';
+				};
+				$('#chat').html(new_chat);
+				
+				//control scrolling. Stay put unless a new message pops in.
+				/*these three lines inspired from http://stackoverflow.com/questions/12657206/how-to-scroll-down-to-new-messages-on-ajax-chat */
+				var newscrollHeight = $("#chat")[0].scrollHeight;
+				if(newscrollHeight > oldscrollHeight){
+					$("#chat").scrollTop($("#chat")[0].scrollHeight);
+				}
+			});
+		;//end ajax
+	};//end refresh
+	refresh_chat(); //restart it all
+	
+			
+	
+	
+	/*modal dialog when clicking on forms*/
 	$(document).on("click", ".tableContainer table tr", function(e) {
 		var tid = $(this).find('.tid').html();
 		console.log(tid);
@@ -65,12 +99,12 @@ $(document).ready(function() {
 				//$('#in_modal').html(target_table);
 	
 				//console.log(target_table);
-
-			});
-		             
+			}); //end then function()
 		       ;//end ajax	
 		}); //end doc table onclick
 	
+	
+	//Add Target Button in NAVBAR
 	$("#add_target").click(function(){
 		
 		$('#change_action').attr("action", "/target/add_target"); //change the submit buttons target url
@@ -82,18 +116,26 @@ $(document).ready(function() {
 		$('#scanned').val("");
 		$('#notes').val(""); //this converts the funky htmlspecial chars to text.
 		$('#description').val(""); //this converts the funky htmlspecial chars to text.
-				
-		
-		
-		$('#modal').modal();
-				
+		$('#modal').modal();	//fire model dialog		
 	}); //end add_target
 	
+
+	$('#send-message-button').click(function(){		
+		var message = $('#message').val();		
+		$.ajax({
+			type: "POST",
+			url: "/chat/send",
+			data: { message : message }, //all the user object POST vars get dragged along too
+			success: function(){
+				$('#message').val("");	//clear the text input box
+			}
+		})//end ajax			
+	return false;	
+	});	//end click
 	
 	
 	
-	
-});
+}); //Document ready
 
 
 

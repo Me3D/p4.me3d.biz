@@ -9,13 +9,15 @@
 	
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/bootstrap.css" >
-	<link rel="stylesheet" type="text/css" href="http://w2ui.com/src/w2ui-1.3.min.css" />
+	<!--<link rel="stylesheet" type="text/css" href="http://w2ui.com/src/w2ui-1.3.min.css" />-->
+	<link rel="stylesheet" href="/css/jquery.jscrollpane.css" >
 	<script type="text/javascript" src="/js/jquery.min.js"></script>
 	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/js/scripts.js"></script>
 	<script type="text/javascript" src="/js/jqBootstrapValidation.js"></script>
 	<script type="text/javascript" src="/js/jquery.fixedheadertable.min.js"></script>
-	<script type="text/javascript" src="http://w2ui.com/src/w2ui-1.3.min.js"></script>
+	<!--<script type="text/javascript" src="http://w2ui.com/src/w2ui-1.3.min.js"></script>-->
+	<script type="text/javascript" src="/js/jquery.jscrollpane.min.js"></script>
 	
 	<?php if(isset($client_files_head)) echo $client_files_head; ?>
 	
