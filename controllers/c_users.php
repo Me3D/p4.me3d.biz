@@ -111,7 +111,7 @@ class users_controller extends base_controller {
 
         # Create the data array we'll use with the update method
         # In this case, we're only updating one field, so our array only has one entry
-        $data = Array("token" => $new_token);
+       $data = Array("token" => $new_token);
 
         # Do the update
         DB::instance(DB_NAME)->update("users", $data, "WHERE token = '".$this->user->token."'");
@@ -123,7 +123,30 @@ class users_controller extends base_controller {
         Router::redirect("/");
     }
     
-            
+    
+    /* get a list of users and last seen times*/
+    public function get_users(){
+	if(!$this->user) {
+	    Router::redirect('/');
+	}else {
+	    $q = "SELECT username, lastseen FROM users";
+	    $lastseen = DB::instance(DB_NAME)->select_rows($q);
+	    echo json_encode($lastseen);
+	}//end else      
+    }//end get_users
+    
+    /* update the lastseen time of the user*/
+    public function lastseen(){
+	    $seen = Time::now();
+	
+		$q = "UPDATE users SET
+			lastseen = '".$seen."'  
+			WHERE user_id = '".$this->user->user_id."'
+			";
+	
+		DB::instance(DB_NAME)->query($q);
+	}//end lastseen
+    
 }//end of users_controller class
 
 ?>

@@ -13,20 +13,16 @@ class target_controller extends base_controller {
 	Accessed via http://localhost/update/ used by AJAX to update the targets table
 	-------------------------------------------------------------------------------------------------*/
 	public function update() {
-
-
+		
 		$q = 'SELECT * from targets';
 		$targets = DB::instance(DB_NAME)->select_rows($q);
-		
-		//print_r($targets);
-		//$targets = htmlspecialchars($targets, ENT_QUOTES, 'UTF-8');
-		
-		
 		
 		echo json_encode($targets);
 
 	} # End of method
 
+	
+	
 	/*Put user back to main interface */
 	public function index() {
 		Router::redirect('/');

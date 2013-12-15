@@ -23,6 +23,8 @@ class chat_controller extends base_controller {
 
 			# Now set the <title> tag
 			$this->template->title = "Storm Chat";
+			
+			$this->template->content->username = $this->user->username;
 
 			# Render the view
 			echo $this->template;
@@ -30,7 +32,7 @@ class chat_controller extends base_controller {
 	} # End of method
 
 	/*User to send a chat message into the database */
-	public function send(){
+	public function send($flag = 0){
 		if(!$this->user) {
 			Router::redirect('/');
 		}
@@ -52,7 +54,7 @@ class chat_controller extends base_controller {
 		}
 		
 		$q = 'SELECT * FROM
-		(SELECT messages.message, messages.message_id, users.username
+		(SELECT messages.message, messages.message_id, messages.flag, users.username
 		FROM `messages`
 		INNER JOIN users
 		ON messages.user_id=users.user_id

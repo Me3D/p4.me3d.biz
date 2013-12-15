@@ -45,8 +45,24 @@ $(document).ready(function() {
 			function (){ //stuff chats into the chat div
 				var new_chat = "";
 				for (i = 0; i < c.length; i++) {
-					new_chat += '<div class="chat_username">' + c[i].username + ': </div><div class="chat_message">' + c[i].message + '</div>' + '<p></p>';
-				};
+					
+					switch (c[i].flag){
+						case '0':	//normal messages
+							new_chat += '<div class="chat_username label label-default">' + c[i].username + ' </div><div class="chat_message"> ' + c[i].message + '</div>' + '<p></p>';
+							break;
+						case '1':	//red alert
+							$('#alert_text').removeClass().addClass('label label-danger');
+							$('#alert_text').html(c[i].message);
+							new_chat += '<div class="chat_username label label-default">' + c[i].username + ' </div><div class="chat_message label label-danger"> ' + c[i].message + '</div>' + '<p></p>';
+							break;
+						case '2':	//info alert
+							$('#alert_text').removeClass().addClass('label label-info');
+							$('#alert_text').html(c[i].message);
+							new_chat += '<div class="chat_username label label-default">' + c[i].username + ' </div><div class="chat_message label label-info"> ' + c[i].message + '</div>' + '<p></p>';
+							break;
+					}//end switch
+					
+				}; //end for
 				$('#chat').html(new_chat);
 				
 				//control scrolling. Stay put unless a new message pops in.
@@ -60,7 +76,19 @@ $(document).ready(function() {
 	};//end refresh
 	refresh_chat(); //restart it all
 	
-			
+	/*update the target table*/
+	var refresh_lastseen = function() {
+		$.ajax({
+			url: '/users/lastseen',
+			async: true,
+			success: function(  ){
+				setTimeout(function() {
+					refresh_lastseen();
+				}, interval);
+			}//end success
+		});//end ajax
+	};//end refresh
+	refresh_lastseen(); //restart it all
 	
 	
 	/*modal dialog when clicking on forms*/
@@ -79,12 +107,9 @@ $(document).ready(function() {
 			}//end success
 		})).then(
 			function (){
-				//var target_table ="" ;
-	
-				//target_table = '<table><tbody><tr id="' + tid + '"><td class="tid">' + t[0].target_id + '</td><td class="ip"> ' + t[0].target_ip + '</td><td class="os">' + t[0].os + '</td><td class="scan">' + t[0].scanned + '</td><td class="description">' + t[0].description + '</td></tr></tbody></table>';
 				
 				//Set modal dialog title
-				$('#modal_title').html("Target ID " + t[0].target_id);
+				$('#target_modal_title').html("Target ID " + t[0].target_id);
 				//set IP address, OS, Scanned and Notes
 				$('#tid').val(t[0].target_id);
 				$('#ip_address').val(t[0].target_ip);
@@ -93,20 +118,17 @@ $(document).ready(function() {
 				$('#notes').val(htmlspecialchars_decode(t[0].notes),'ENT_NOQUOTES'); //this converts the funky htmlspecial chars to text.
 				$('#description').val(htmlspecialchars_decode(t[0].description),'ENT_NOQUOTES'); //this converts the funky htmlspecial chars to text.
 				
-				//var target_form = "";
 				
-				$('#modal').modal();
-				//$('#in_modal').html(target_table);
-	
-				//console.log(target_table);
+				$('#target_modal').modal({keyboard: true});
+
 			}); //end then function()
 		       ;//end ajax	
 		}); //end doc table onclick
 	
 	
-	//Add Target Button in NAVBAR
+	//"Add Target" Button in NAVBAR
 	$("#add_target").click(function(){
-		
+		console.log("cleeck");
 		$('#change_action').attr("action", "/target/add_target"); //change the submit buttons target url
 		$("button").remove("#del_but");					//get rid of delete button
 		$('#modal_title').html("New Target");
@@ -116,28 +138,129 @@ $(document).ready(function() {
 		$('#scanned').val("");
 		$('#notes').val(""); //this converts the funky htmlspecial chars to text.
 		$('#description').val(""); //this converts the funky htmlspecial chars to text.
-		$('#modal').modal();	//fire model dialog		
+		$('#target_modal').modal({keyboard: true});	//fire model dialog		
 	}); //end add_target
 	
-
-	$('#send-message-button').click(function(){		
-		var message = $('#message').val();		
-		$.ajax({
-			type: "POST",
-			url: "/chat/send",
-			data: { message : message }, //all the user object POST vars get dragged along too
-			success: function(){
-				$('#message').val("");	//clear the text input box
+	
+	$('#help_user').click(function(){
+		$('#modal_help').modal({keyboard: true});
+		
+	}); //end help_user
+	
+	
+	//deprecated
+	//$('#send-message-button').click(function(){		
+	//	var message = $('#message').val();		
+	//	$.ajax({
+	//		type: "POST",
+	//		url: "/chat/send",
+	//		data: { message : message }, //all the user object POST vars get dragged along too
+	//		success: function(){
+	//			$('#message').val("");	//clear the text input box
+	//		}
+	//	})//end ajax			
+	//return false;	
+	//});	//end click
+	
+	//Send button in chat
+	$('#send-message-button').click(sendMessage);
+	
+	//use ENTER to send in chat.
+	$('.message').on("keypress", function(e) {
+		if (e.keyCode == 13) {
+			sendMessage();
+			return false;
+		}else{
+			return true; //this is needed to fix the complaint of an anonymous function not returning something.
+		}
+	
+	});
+	
+	/*Function to send a message and uses commands*/
+	function sendMessage() {
+		var message = $('#message').val();
+		var flag = 0;
+		/*start of user commands*/
+		var splitme = message.split(' ');
+		if (splitme[0].charAt(0) == '/') { //if the first char of the first word is a slash then we might have a command
+			switch(splitme[0]){
+				case '/?':				//show help modal dialog
+					$('#modal_help').modal();	
+					break;
+				case '/help':				//show help modal dialog
+					$('#modal_help').modal();	
+					break;
+				case '/u':
+				case '/users':				//show list of users and last seen time stamp
+					$.when($.ajax({
+						url: '/users/get_users',
+						dataType: 'json',
+						async: true,
+						success: function( users ){
+							u = users;
+						}//end success
+					})).then(
+						function (){
+							var time_now = ((new Date).getTime()/1000);
+							
+;							console.log(time_now);
+							var user_table = '<table cellpadding="5" ><tbody><thead><tr><th>Username</th><th>Last Seen (seconds) ago</th></tr></thead>' ;
+							for (i = 0; i < u.length; i++) {
+								user_table += '<tr><td>' + u[i].username + '</td>' + '<td>' + (time_now - u[i].lastseen ).toFixed(0) + '</td></tr>';
+							};
+							user_table += "</table></tbody>" ;
+							$('#in_modal_users').html(user_table);
+							$('#modal_users').modal();
+						});
+					;//end ajax   
+					break;
+				case '/r':
+					var cut_message = message.substring(2);
+					ajax_send_message(cut_message, 1);
+					break;
+				case '/red':				//send team red alert flag = 1
+					var cut_message = message.substring(4);
+					ajax_send_message(cut_message, 1);
+					break;
+				case '/i':
+					var cut_message = message.substring(3);
+					ajax_send_message(cut_message, 2);
+					break;
+				case '/info':				//send team info alert flag = 2
+					var cut_message = message.substring(5);
+					ajax_send_message(cut_message, 2);
+					break;
+				
 			}
-		})//end ajax			
+		return false;	//keeps the help commands from being sent
+		}
+		
+		ajax_send_message(message, flag);
+		
 	return false;	
-	});	//end click
+	}
 	
 	
 	
 }); //Document ready
 
 
+/* Send messages
+message is the message
+flag is a numeric indicator of the type of message
+1 = red alert
+2 = info alert
+*/
+function ajax_send_message(message, flag) {
+	$.ajax({
+		type: "POST",
+		url: "/chat/send",
+		data: { message : message, flag : flag }, //all the user object POST vars get dragged along too
+		success: function(){
+		$('#message').val("");	//clear the text input box
+		}
+	})//end ajax
+}
 
 
 /*htmlspecialchars  sourced from http://phpjs.org/functions/htmlspecialchars_decode/*/
