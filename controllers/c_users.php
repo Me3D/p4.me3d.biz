@@ -52,6 +52,18 @@ class users_controller extends base_controller {
 		    //name, actual value, time length, directory access
 		    //pull out cookie from browser developer tools
 		    setcookie('token', $token, strtotime('+1 year'), '/');
+		    //drop a info message in chat about joining!
+		    $q = 'SELECT user_id
+		    FROM users
+		    WHERE token = "'.$token.'" ';
+		    $user_id =  DB::instance(DB_NAME)->select_field($q);
+		    
+		    $username = $_POST['username'];
+
+		    $q = 'INSERT INTO `messages`(`message`, `user_id`, `flag`) VALUES ('."'$username has entered the chat!'" .','."'$user_id'".','."'2'".')';
+	    
+		    DB::instance(DB_NAME)->query($q);
+		    
 		    Router::redirect('/chat');
 		}
 		#fail
@@ -76,6 +88,19 @@ class users_controller extends base_controller {
 		//name, actual value, time length, directory access
 		//pull out cookie from browser developer tools
 		setcookie('token', $token, strtotime('+1 year'), '/');
+		
+		    //drop a info message in chat about joining!
+		    $q = 'SELECT user_id
+		    FROM users
+		    WHERE token = "'.$token.'" ';
+		    $user_id =  DB::instance(DB_NAME)->select_field($q);
+		    
+		    $username = $_POST['username'];
+
+		    $q = 'INSERT INTO `messages`(`message`, `user_id`, `flag`) VALUES ('."'$username has entered the chat!'" .','."'$user_id'".','."'2'".')';
+	    
+		    DB::instance(DB_NAME)->query($q);
+		
 		Router::redirect('/chat');
 	    }
 	 #fail
@@ -106,12 +131,17 @@ class users_controller extends base_controller {
     
     /*Logout the user*/
     public function logout(){
+	$q = 'SELECT user_id
+	    FROM users
+	    WHERE username = "'.$this->user->username.'" ';
+	$user_id =  DB::instance(DB_NAME)->select_field($q);
+
         # Generate and save a new token for next login
         $new_token = sha1(TOKEN_SALT.$this->user->username.Utils::generate_random_string());
 
         # Create the data array we'll use with the update method
         # In this case, we're only updating one field, so our array only has one entry
-       $data = Array("token" => $new_token);
+        $data = Array("token" => $new_token);
 
         # Do the update
         DB::instance(DB_NAME)->update("users", $data, "WHERE token = '".$this->user->token."'");
@@ -119,6 +149,12 @@ class users_controller extends base_controller {
         # Delete their token cookie by setting it to a date in the past - effectively logging them out
         setcookie("token", "", strtotime('-1 year'), '/');
 
+	//drop a info message in chat about logging out!
+	$username = $this->user->username;
+	$q = 'INSERT INTO `messages`(`message`, `user_id`, `flag`) VALUES ('."'$username has left the chat!'" .','."'$user_id'".','."'2'".')';
+	DB::instance(DB_NAME)->query($q);
+	
+	
         # Send them back to the main index.
         Router::redirect("/");
     }
@@ -146,6 +182,63 @@ class users_controller extends base_controller {
 	
 		DB::instance(DB_NAME)->query($q);
 	}//end lastseen
+    
+    
+    public function useredit(){
+	if(!$this->user) {
+	    Router::redirect('/');
+	}else {
+	    $old_username =  $this->user->username;
+	     //check if that username is taken.
+	    $q = 'SELECT count(*)
+                FROM users
+                WHERE username = "'.$_POST['username'].'"';
+	    $count = DB::instance(DB_NAME)->select_rows($q);
+	
+	    if(intval($count[0]['count(*)']) >= 1) {  	//username taken
+                Router::redirect('/');
+	    }else{
+		if(strlen($_POST['username']) >= 1 ) {
+		    $_POST['username'] = htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8');
+		    $q = "UPDATE users SET
+		    username = '".$_POST['username']."'
+		    WHERE user_id = '".$this->user->user_id."'
+		    ";
+		    DB::instance(DB_NAME)->query($q);
+		    
+		    $user_id = $this->user->user_id;
+		   
+		    //let everyone know of namechange!		    
+		    $username = $_POST['username'];
+		    $q = 'INSERT INTO `messages`(`message`, `user_id`, `flag`) VALUES ('."'$old_username has changed his/her/its name to $username!'" .','."'$user_id'".','."'2'".')';
+		    DB::instance(DB_NAME)->query($q);
+		}
+		
+		if(strlen($_POST['password']) >= 1 ) {
+		    $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
+		    $q = "UPDATE users SET
+		    password = '".$_POST['password']."'
+		    WHERE user_id = '".$this->user->user_id."'
+		    ";
+		    DB::instance(DB_NAME)->query($q);
+		}
+		    
+		    
+		    
+		    Router::redirect('/');
+
+
+
+	    }//end inside else
+	    
+	    
+	    
+	}//end big else
+	
+    }
+    
+    
+    
     
 }//end of users_controller class
 

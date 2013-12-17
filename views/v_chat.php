@@ -4,7 +4,7 @@
         $(".right-add").append('<li><a id="help_user">Help</a></li>')
 	$(".right-add").append('<li><a href="/users/logout">Logout</a></li>')
         $(".left-add").append('<li><a id="add_target">Add Target</a></li>')
-        $(".left-add").append('<li><a id="username">Logged in as: <?php echo $username; ?> </a></li>')
+        $(".left-add").append('<li><a id="username_button">Logged in as: <?php echo $username; ?> </a></li>')
 </script>
 
 
@@ -170,6 +170,7 @@
                <p><strong>/users or /u</strong> - List all known users and last seen time.</p>
                <p><strong>/red or /r</strong> - Send team a RED alert.</p> 
                <p><strong>/info or /i</strong> - Send team an INFO alert.</p>
+               <p>Pro-tip: Use [ESC]ape key to close all op up dialogs.</p>
       </div>
 	
       <div class="modal-footer">
@@ -204,3 +205,36 @@
 </div><!-- /.modal -->
 <!--Modal pop up users list-->
 
+<!--Modal pop up useredit -->
+<div class="modal fade" id="modal_useredit" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="useredit_modal_title">User Edit</h4>
+      </div>
+        
+      <div class="modal-body" id="in_modal_useredit">
+              <form id="change_action" role="form" method='POST' action='/users/useredit'>
+               <div id="edit_warning" class=""></div> 
+                <div class="form-group">
+                 <label for="username">Username</label>
+                 <textarea type="text" class="form-control" id="username" name="username" rows="1"></textarea>
+                </div>
+                
+              <div class="form-group">
+                <label for="password">New Password</label>
+                <input type="password" class="form-control" id="password" name="password">
+              </div>
+  
+                <p class="help-block">Enter new username and password.</p>
+                   <div class="row">
+                    <div class="col-md-1"><button type="submit" name="update" class="btn btn-primary">Submit</button></div>
+                  </div>
+              </div>
+      </div>
+	
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!--Modal pop up users list-->

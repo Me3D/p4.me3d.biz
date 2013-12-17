@@ -128,7 +128,6 @@ $(document).ready(function() {
 	
 	//"Add Target" Button in NAVBAR
 	$("#add_target").click(function(){
-		console.log("cleeck");
 		$('#change_action').attr("action", "/target/add_target"); //change the submit buttons target url
 		$("button").remove("#del_but");					//get rid of delete button
 		$('#modal_title').html("New Target");
@@ -140,6 +139,13 @@ $(document).ready(function() {
 		$('#description').val(""); //this converts the funky htmlspecial chars to text.
 		$('#target_modal').modal({keyboard: true});	//fire model dialog		
 	}); //end add_target
+	
+	
+	$("#username_button").click(function(){
+		$('#modal_useredit').modal({keyboard: true});	
+		
+	});
+	
 	
 	
 	$('#help_user').click(function(){
