@@ -170,7 +170,7 @@
                <p><strong>/users or /u</strong> - List all known users and last seen time.</p>
                <p><strong>/red or /r</strong> - Send team a RED alert.</p> 
                <p><strong>/info or /i</strong> - Send team an INFO alert.</p>
-               <p>Pro-tip: Use [ESC]ape key to close all op up dialogs.</p>
+               <p>Pro-tip: Use [ESC]ape key to close all pop up dialogs.</p>
       </div>
 	
       <div class="modal-footer">
