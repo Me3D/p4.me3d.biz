@@ -37,6 +37,22 @@
  </div> <!-- end row-->
   <!-- top half of screen for targets -->
   
+  <!-- target help text -->
+<div class = "row" >
+    <div class="col-md-1"></div> <!-- spacer to align with targets table -->
+            <div class="col-md-10">
+            <div id="target_help_text" >
+                <p class="text-primary">Click on a row for more target detail.</p>
+            </div> <!-- chat -->
+            </div>
+    <div class="col-md-1"></div><!-- spacer to align with targets table -->
+</div>
+  
+  
+  
+  
+  
+  
 <!-- alert text -->
 <div class = "row" >
     <div class="col-md-1"></div> <!-- spacer to align with targets table -->
