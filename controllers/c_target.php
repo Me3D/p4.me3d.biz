@@ -45,9 +45,7 @@ class target_controller extends base_controller {
 	//Updates a target in the database from the modal dialog.
 	public function update_target () {
 		
-		# Dump out the results of POST to see what the form submitted
-		//echo '<pre>';
-		//print_r($_POST);
+		
 		
 		if(isset($_POST['update'])) {
 			$tid = $_POST["tid"];
@@ -67,12 +65,40 @@ class target_controller extends base_controller {
 			";
 			
 			DB::instance(DB_NAME)->query($q);
-			//echo '</pre>';
+			
+			
+			//let everyone know of target update
+			$q = 'SELECT user_id
+			FROM users
+			WHERE username = "'.$this->user->username.'" ';
+			$user_id =  DB::instance(DB_NAME)->select_field($q);
+			
+			
+			$q = 'INSERT INTO `messages`(`message`, `user_id`, `flag`) VALUES ('."'has updated target $tid'" .','."'$user_id'".','."'2'".')';
+			DB::instance(DB_NAME)->query($q);
+			
+			
 			Router::redirect('/');
 		}elseif(isset($_POST['delete'])){
 			$tid = $_POST["tid"];
 			$q = "DELETE from targets WHERE target_id = '".$tid."' ";
 			DB::instance(DB_NAME)->query($q);
+			
+			
+			//let everyone know of target update
+			$q = 'SELECT user_id
+			FROM users
+			WHERE username = "'.$this->user->username.'" ';
+			$user_id =  DB::instance(DB_NAME)->select_field($q);
+			
+			
+			$q = 'INSERT INTO `messages`(`message`, `user_id`, `flag`) VALUES ('."'has deleted target $tid'" .','."'$user_id'".','."'2'".')';
+			DB::instance(DB_NAME)->query($q);
+			
+			
+			
+			
+			
 			Router::redirect('/');		
 		}//end elseif
 	}//end update target
@@ -94,6 +120,22 @@ class target_controller extends base_controller {
 		description = '$description'		
 		";
 		DB::instance(DB_NAME)->query($q);
+		
+		
+		
+		//let everyone know of target update
+		$q = 'SELECT user_id
+		FROM users
+		WHERE username = "'.$this->user->username.'" ';
+		$user_id =  DB::instance(DB_NAME)->select_field($q);
+		
+		
+		$q = 'INSERT INTO `messages`(`message`, `user_id`, `flag`) VALUES ('."'has added target!'" .','."'$user_id'".','."'2'".')';
+		DB::instance(DB_NAME)->query($q);
+	
+		
+		
+		
 		Router::redirect('/');
 	}
 	

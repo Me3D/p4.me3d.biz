@@ -58,9 +58,9 @@ class users_controller extends base_controller {
 		    WHERE token = "'.$token.'" ';
 		    $user_id =  DB::instance(DB_NAME)->select_field($q);
 		    
-		    $username = $_POST['username'];
+		    
 
-		    $q = 'INSERT INTO `messages`(`message`, `user_id`, `flag`) VALUES ('."'$username has entered the chat!'" .','."'$user_id'".','."'2'".')';
+		    $q = 'INSERT INTO `messages`(`message`, `user_id`, `flag`) VALUES ('."'has entered the chat!'" .','."'$user_id'".','."'2'".')';
 	    
 		    DB::instance(DB_NAME)->query($q);
 		    
@@ -95,9 +95,9 @@ class users_controller extends base_controller {
 		    WHERE token = "'.$token.'" ';
 		    $user_id =  DB::instance(DB_NAME)->select_field($q);
 		    
-		    $username = $_POST['username'];
+		   
 
-		    $q = 'INSERT INTO `messages`(`message`, `user_id`, `flag`) VALUES ('."'$username has entered the chat!'" .','."'$user_id'".','."'2'".')';
+		    $q = 'INSERT INTO `messages`(`message`, `user_id`, `flag`) VALUES ('."'has entered the chat!'" .','."'$user_id'".','."'2'".')';
 	    
 		    DB::instance(DB_NAME)->query($q);
 		
@@ -150,8 +150,8 @@ class users_controller extends base_controller {
         setcookie("token", "", strtotime('-1 year'), '/');
 
 	//drop a info message in chat about logging out!
-	$username = $this->user->username;
-	$q = 'INSERT INTO `messages`(`message`, `user_id`, `flag`) VALUES ('."'$username has left the chat!'" .','."'$user_id'".','."'2'".')';
+	
+	$q = 'INSERT INTO `messages`(`message`, `user_id`, `flag`) VALUES ('."'has left the chat!'" .','."'$user_id'".','."'2'".')';
 	DB::instance(DB_NAME)->query($q);
 	
 	
@@ -209,7 +209,7 @@ class users_controller extends base_controller {
 		    $user_id = $this->user->user_id;
 		   
 		    //let everyone know of namechange!		    
-		    $username = $_POST['username'];
+		   
 		    $q = 'INSERT INTO `messages`(`message`, `user_id`, `flag`) VALUES ('."'$old_username has changed his/her/its name to $username!'" .','."'$user_id'".','."'2'".')';
 		    DB::instance(DB_NAME)->query($q);
 		}
