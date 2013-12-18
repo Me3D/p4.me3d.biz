@@ -227,7 +227,7 @@
                 <input type="password" class="form-control" id="password" name="password">
               </div>
   
-                <p class="help-block">Enter new username and password.</p>
+                <p class="help-block">Enter new username or password (min 1 char each). Invalid values are silently ignored...</p>
                    <div class="row">
                     <div class="col-md-1"><button type="submit" name="update" class="btn btn-primary">Submit</button></div>
                   </div>
