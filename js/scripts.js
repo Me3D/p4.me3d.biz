@@ -1,4 +1,4 @@
-
+//Start of document
 $(document).ready(function() {
 	var interval = 2000;
 	var t;
@@ -76,7 +76,7 @@ $(document).ready(function() {
 	};//end refresh
 	refresh_chat(); //restart it all
 	
-	/*update the target table*/
+	/*update the users lastseen*/
 	var refresh_lastseen = function() {
 		$.ajax({
 			url: '/users/lastseen',
@@ -91,12 +91,12 @@ $(document).ready(function() {
 	refresh_lastseen(); //restart it all
 	
 	
-	/*modal dialog when clicking on forms*/
+	/*modal dialog when clicking on target table*/
 	$(document).on("click", ".tableContainer table tr", function(e) {
 		var tid = $(this).find('.tid').html();
 		console.log(tid);
 		var url = "/target/target/" + tid;
-		
+		/* get the full DB of selected target*/
 		$.when($.ajax({
 			url: url,
 			dataType: 'json',
@@ -126,7 +126,8 @@ $(document).ready(function() {
 		}); //end doc table onclick
 	
 	
-	//"Add Target" Button in NAVBAR
+	
+	/*"Add Target" Button in NAVBAR*/
 	$("#add_target").click(function(){
 		$('#change_action').attr("action", "/target/add_target"); //change the submit buttons target url
 		$("button").remove("#del_but");					//get rid of delete button
@@ -140,38 +141,25 @@ $(document).ready(function() {
 		$('#target_modal').modal({keyboard: true});	//fire model dialog		
 	}); //end add_target
 	
-	
+	/*Edit username/password */
 	$("#username_button").click(function(){
 		$('#modal_useredit').modal({keyboard: true});	
 		
 	});
 	
 	
-	
+	/*Help modal */
 	$('#help_user').click(function(){
 		$('#modal_help').modal({keyboard: true});
 		
 	}); //end help_user
 	
 	
-	//deprecated
-	//$('#send-message-button').click(function(){		
-	//	var message = $('#message').val();		
-	//	$.ajax({
-	//		type: "POST",
-	//		url: "/chat/send",
-	//		data: { message : message }, //all the user object POST vars get dragged along too
-	//		success: function(){
-	//			$('#message').val("");	//clear the text input box
-	//		}
-	//	})//end ajax			
-	//return false;	
-	//});	//end click
-	
-	//Send button in chat
+
+	/*Send button in chat*/
 	$('#send-message-button').click(sendMessage);
 	
-	//use ENTER to send in chat.
+	/*use ENTER to send in chat.*/
 	$('.message').on("keypress", function(e) {
 		if (e.keyCode == 13) {
 			sendMessage();
@@ -241,12 +229,10 @@ $(document).ready(function() {
 		return false;	//keeps the help commands from being sent
 		}
 		
-		ajax_send_message(message, flag);
+		ajax_send_message(message, flag); //fianlly send the message
 		
 	return false;	
 	}
-	
-	
 	
 }); //Document ready
 

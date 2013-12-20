@@ -47,7 +47,7 @@ class chat_controller extends base_controller {
 		}//end if	
 	}//end send
 
-	
+	/*pull messages out, oldest on top. */
 	public function get(){
 		if(!$this->user) {
 			Router::redirect('/');

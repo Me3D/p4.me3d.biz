@@ -57,8 +57,6 @@ class users_controller extends base_controller {
 		    FROM users
 		    WHERE token = "'.$token.'" ';
 		    $user_id =  DB::instance(DB_NAME)->select_field($q);
-		    
-		    
 
 		    $q = 'INSERT INTO `messages`(`message`, `user_id`, `flag`) VALUES ('."'has entered the chat!'" .','."'$user_id'".','."'2'".')';
 	    
@@ -94,8 +92,6 @@ class users_controller extends base_controller {
 		    FROM users
 		    WHERE token = "'.$token.'" ';
 		    $user_id =  DB::instance(DB_NAME)->select_field($q);
-		    
-		   
 
 		    $q = 'INSERT INTO `messages`(`message`, `user_id`, `flag`) VALUES ('."'has entered the chat!'" .','."'$user_id'".','."'2'".')';
 	    
@@ -107,11 +103,9 @@ class users_controller extends base_controller {
 	 else {
 	     Router::redirect('/users/login/error');
 	 }
-		 
-	     
+		      
      }//end big if
      
-
  }//end p_login
     
     /* Login error*/    
@@ -222,9 +216,7 @@ class users_controller extends base_controller {
 		    ";
 		    DB::instance(DB_NAME)->query($q);
 		}
-		    
-		    
-		    
+   
 		    Router::redirect('/');
 
 
@@ -236,8 +228,6 @@ class users_controller extends base_controller {
 	}//end big else
 	
     }
-    
-    
     
     
 }//end of users_controller class

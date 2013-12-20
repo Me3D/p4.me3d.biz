@@ -44,9 +44,6 @@ class target_controller extends base_controller {
 	
 	//Updates a target in the database from the modal dialog.
 	public function update_target () {
-		
-		
-		
 		if(isset($_POST['update'])) {
 			$tid = $_POST["tid"];
 			$ip = $_POST["ip_address"];
@@ -83,8 +80,7 @@ class target_controller extends base_controller {
 			$tid = $_POST["tid"];
 			$q = "DELETE from targets WHERE target_id = '".$tid."' ";
 			DB::instance(DB_NAME)->query($q);
-			
-			
+						
 			//let everyone know of target update
 			$q = 'SELECT user_id
 			FROM users
@@ -94,10 +90,6 @@ class target_controller extends base_controller {
 			
 			$q = 'INSERT INTO `messages`(`message`, `user_id`, `flag`) VALUES ('."'has deleted target $tid'" .','."'$user_id'".','."'2'".')';
 			DB::instance(DB_NAME)->query($q);
-			
-			
-			
-			
 			
 			Router::redirect('/');		
 		}//end elseif
@@ -120,9 +112,7 @@ class target_controller extends base_controller {
 		description = '$description'		
 		";
 		DB::instance(DB_NAME)->query($q);
-		
-		
-		
+			
 		//let everyone know of target update
 		$q = 'SELECT user_id
 		FROM users
@@ -132,9 +122,6 @@ class target_controller extends base_controller {
 		
 		$q = 'INSERT INTO `messages`(`message`, `user_id`, `flag`) VALUES ('."'has added target!'" .','."'$user_id'".','."'2'".')';
 		DB::instance(DB_NAME)->query($q);
-	
-		
-		
 		
 		Router::redirect('/');
 	}
