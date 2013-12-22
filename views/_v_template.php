@@ -40,11 +40,9 @@
 
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    <ul class="nav navbar-nav">
 	<ul class="nav navbar-nav navbar-left left-add">
      <!-- Menu items get added here via JQUERY in each page-->
 	</ul>
-    </ul>
 
     <ul class="nav navbar-nav navbar-right right-add">
      <!-- Menu items get added here via JQUERY in each page-->
@@ -58,6 +56,5 @@
 		
 
 		
-	</div>	 <!--container-->
 </body>
 </html>

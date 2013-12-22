@@ -1,7 +1,7 @@
 <div class="container">
 	
 	<div class="row text-center pseudo-jumbotron">
-		<img src="/img/stormchat.png">
+		<img src="/img/stormchat.png" alt="stormchat">
 	</div>
 
 	<div class="row-fluid padtop">
